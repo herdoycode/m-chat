@@ -1,9 +1,11 @@
+import { useMessageCollapse } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./SingleChat.scss";
 
 const SingleChat = () => {
+  const handleCollapse = useMessageCollapse((s) => s.setCollapse);
   return (
-    <div className="single-chat">
+    <div onClick={handleCollapse} className="single-chat">
       <div className="friend-info">
         <div className="friend-avatar">
           <Avatar

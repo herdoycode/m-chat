@@ -4,7 +4,7 @@
   grid-template-rows: repeat(1, 1fr);
   grid-template-columns: 7rem 40rem 1fr;
   .outlet-layout {
-    background: #f2f2f2;
+    background: var(--bg-secondary);
   }
   @media screen and (max-width: 990px) {
     grid-template-columns: repeat(1, 1fr);
@@ -20,7 +20,12 @@
       width: 100%;
       position: fixed;
       top: 0;
+      background: var(--bg-primary);
       transform: translateX(100%);
+      transition: 0.3s ease;
+      &.active {
+        transform: translateX(0%);
+      }
     }
   }
 }

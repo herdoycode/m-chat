@@ -1,0 +1,32 @@
+.messages {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 9rem 1fr 9rem;
+  grid-template-columns: repeat(1, 1fr);
+  .top {
+    display: flex;
+    align-items: center;
+    padding: 0rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    .user-info {
+      display: flex;
+      align-items: center;
+      .arrow {
+        font-size: 2.2rem;
+        cursor: pointer;
+        margin-bottom: -0.6rem;
+        margin-right: 2rem;
+        display: none;
+        @media screen and (max-width: 990px) {
+          display: block;
+        }
+      }
+      .user-avatar {
+        margin-right: 1rem;
+      }
+    }
+  }
+  .bottom {
+    border-top: 1px solid var(--border-color);
+  }
+}

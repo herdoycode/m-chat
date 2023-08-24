@@ -1,4 +1,7 @@
 .single-chat {
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   .friend-info {
@@ -12,5 +15,8 @@
   }
   .time {
     font-size: 1.2rem;
+  }
+  &:hover {
+    background: var(--bg-hover);
   }
 }

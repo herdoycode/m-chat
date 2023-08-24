@@ -3,8 +3,11 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import { PiMessengerLogo, PiMoon, PiUserList } from "react-icons/pi";
 import Avatar from "../avatar/Avatar";
 import "./Sidebar.scss";
+import { useThemeStore } from "../../store";
 
 const Sidebar = () => {
+  const toggleTheme = useThemeStore((s) => s.toggleMode);
+
   return (
     <div className="sidebar">
       <div className="brand">
@@ -22,9 +25,9 @@ const Sidebar = () => {
         <a href="/" className="nav-item ">
           <PiUserList />
         </a>
-        <a href="/" className="theme-icon">
+        <span onClick={toggleTheme} className="theme-icon">
           <PiMoon />
-        </a>
+        </span>
         <a href="" className="auth-info">
           <Avatar
             src="https://i.ibb.co/hYTJZXx/me-removebg-preview.jpg"
@@ -34,9 +37,9 @@ const Sidebar = () => {
       </div>
       <div className="auth">
         <div className="theme-icon">
-          <a href="/">
+          <samp onClick={toggleTheme}>
             <PiMoon />
-          </a>
+          </samp>
         </div>
         <Avatar
           src="https://i.ibb.co/hYTJZXx/me-removebg-preview.jpg"

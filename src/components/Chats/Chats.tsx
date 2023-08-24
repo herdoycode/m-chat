@@ -3,7 +3,7 @@ import SearchBox from "../searchBox/SearchBox";
 import SingleChat from "../singleChat/SingleChat";
 import "./Chats.scss";
 
-const actives = [1, 2, 3, 4, 5, 6, 7];
+const actives = [1, 2, 3, 4];
 
 const Chats = () => {
   return (
@@ -27,18 +27,6 @@ const Chats = () => {
         <h3>Recent</h3>
       </div>
       <div className="bottom">
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
         <SingleChat />
         <SingleChat />
         <SingleChat />
