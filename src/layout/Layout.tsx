@@ -1,4 +1,4 @@
-import Chats from "../components/Chats/Chats";
+import Chats from "../components/chats/Chats";
 import Messages from "../components/messages/Messages";
 import Sidebar from "../components/sidebar/Sidebar";
 import "./Layout.scss";

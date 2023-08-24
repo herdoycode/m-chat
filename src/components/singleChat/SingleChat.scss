@@ -1,0 +1,16 @@
+.single-chat {
+  display: flex;
+  justify-content: space-between;
+  .friend-info {
+    display: flex;
+    gap: 1rem;
+    .friend-data {
+      p {
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .time {
+    font-size: 1.2rem;
+  }
+}

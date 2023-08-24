@@ -6,8 +6,8 @@
   justify-content: space-between;
   flex-direction: column;
   .brand {
-    font-size: 4rem;
-    color: #a001fc;
+    font-size: 3.4rem;
+    color: var(--color-primary);
   }
   .nav {
     display: flex;
@@ -17,15 +17,15 @@
     gap: 2rem;
     flex-direction: column;
     .nav-item {
-      width: 5rem;
-      height: 5rem;
+      width: 4.5rem;
+      height: 4.5rem;
       border-radius: 0.8rem;
       display: flex;
       align-items: center;
       justify-content: center;
       &.active {
-        background: #f7e8ff;
-        color: #a001fc;
+        background: var(--color-primary-alt);
+        color: var(--color-primary);
       }
     }
     .theme-icon {
@@ -58,6 +58,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+      font-size: 2.2rem;
       .theme-icon {
         display: block;
       }
