@@ -1,0 +1,76 @@
+.sidebar {
+  padding: 2rem 0rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  .brand {
+    font-size: 4rem;
+    color: #a001fc;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    gap: 2rem;
+    flex-direction: column;
+    .nav-item {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.active {
+        background: #f7e8ff;
+        color: #a001fc;
+      }
+    }
+    .theme-icon {
+      display: none;
+    }
+    .auth-info {
+      display: none;
+    }
+  }
+  .auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 2.5rem;
+    gap: 2rem;
+    .theme-icon {
+      cursor: pointer;
+    }
+  }
+  @media screen and (max-width: 990px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0rem 2rem;
+    width: 100%;
+
+    .nav {
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .theme-icon {
+        display: block;
+      }
+      .auth-info {
+        display: block;
+        cursor: pointer !important;
+      }
+    }
+    .brand {
+      display: none;
+    }
+    .auth {
+      display: none;
+    }
+  }
+}
