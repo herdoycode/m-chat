@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsFillChatDotsFill, BsSun } from "react-icons/bs";
 import { PiMessengerLogo, PiMoon, PiUserList } from "react-icons/pi";
 import { useThemeStore } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./Sidebar.scss";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Sidebar = () => {
+  const { user } = useContext(AuthContext);
   const toggleTheme = useThemeStore((s) => s.toggleMode);
   const mode = useThemeStore((s) => s.mode);
 
@@ -30,10 +33,7 @@ const Sidebar = () => {
           {mode === "dark" ? <BsSun /> : <PiMoon />}
         </span>
         <a href="" className="auth-info">
-          <Avatar
-            src="https://i.ibb.co/hYTJZXx/me-removebg-preview.jpg"
-            isActive={false}
-          />
+          <Avatar src={user.avatar} isActive={false} />
         </a>
       </div>
       <div className="auth">
@@ -42,10 +42,7 @@ const Sidebar = () => {
             {mode === "dark" ? <BsSun /> : <PiMoon />}
           </samp>
         </div>
-        <Avatar
-          src="https://i.ibb.co/hYTJZXx/me-removebg-preview.jpg"
-          isActive={true}
-        />
+        <Avatar src={user.avatar} isActive={false} />
       </div>
     </div>
   );

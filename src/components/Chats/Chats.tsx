@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import useChats from "../../hooks/useChats";
 import Avatar from "../avatar/Avatar";
 import SearchBox from "../searchBox/SearchBox";
 import SingleChat from "../singleChat/SingleChat";
@@ -6,6 +9,9 @@ import "./Chats.scss";
 const actives = [1, 2, 3, 4];
 
 const Chats = () => {
+  const { user } = useContext(AuthContext);
+  const { data: chats } = useChats(user._id);
+
   return (
     <div className="chats">
       <div className="top">
@@ -27,12 +33,9 @@ const Chats = () => {
         <h3>Recent</h3>
       </div>
       <div className="bottom">
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
+        {chats?.map((chat) => (
+          <SingleChat key={chat._id} />
+        ))}
       </div>
     </div>
   );
