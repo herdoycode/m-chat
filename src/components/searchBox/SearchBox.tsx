@@ -1,5 +1,5 @@
-import "./SearchBox.scss";
 import { BsSearch } from "react-icons/bs";
+import "./SearchBox.scss";
 
 const SearchBox = () => {
   return (

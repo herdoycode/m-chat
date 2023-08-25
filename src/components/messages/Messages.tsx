@@ -1,5 +1,5 @@
-import { BsArrowLeft, BsEmojiSmile } from "react-icons/bs";
 import { AiOutlineSend } from "react-icons/ai";
+import { BsArrowLeft, BsEmojiSmile } from "react-icons/bs";
 import { useMessageCollapse } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./Messages.scss";

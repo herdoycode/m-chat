@@ -4,6 +4,7 @@ import Messages from "../components/messages/Messages";
 import Sidebar from "../components/sidebar/Sidebar";
 import { useMessageCollapse, useThemeStore } from "../store";
 import "./Layout.scss";
+
 const Layout = () => {
   const mode = useThemeStore((s) => s.mode);
   const isCollapse = useMessageCollapse((s) => s.isCollapse);

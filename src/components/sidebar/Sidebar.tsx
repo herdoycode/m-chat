@@ -1,9 +1,9 @@
 import { AiOutlineUser } from "react-icons/ai";
 import { BsFillChatDotsFill, BsSun } from "react-icons/bs";
 import { PiMessengerLogo, PiMoon, PiUserList } from "react-icons/pi";
+import { useThemeStore } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./Sidebar.scss";
-import { useThemeStore } from "../../store";
 
 const Sidebar = () => {
   const toggleTheme = useThemeStore((s) => s.toggleMode);
