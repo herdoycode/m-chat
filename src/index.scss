@@ -9,6 +9,7 @@
   --color-text: #4f5e72;
   --color-heading: #303a47;
   --bg-hover: #e4e4e4;
+  --box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.38);
 }
 
 [data-theme="dark"] {
@@ -20,6 +21,7 @@
   --color-text: #848e9b;
   --color-heading: #a9b1bd;
   --bg-hover: #292f3d;
+  --box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.18);
 }
 
 *,
