@@ -1,5 +1,5 @@
 import { AiOutlineUser } from "react-icons/ai";
-import { BsFillChatDotsFill } from "react-icons/bs";
+import { BsFillChatDotsFill, BsSun } from "react-icons/bs";
 import { PiMessengerLogo, PiMoon, PiUserList } from "react-icons/pi";
 import Avatar from "../avatar/Avatar";
 import "./Sidebar.scss";
@@ -7,6 +7,7 @@ import { useThemeStore } from "../../store";
 
 const Sidebar = () => {
   const toggleTheme = useThemeStore((s) => s.toggleMode);
+  const mode = useThemeStore((s) => s.mode);
 
   return (
     <div className="sidebar">
@@ -26,7 +27,7 @@ const Sidebar = () => {
           <PiUserList />
         </a>
         <span onClick={toggleTheme} className="theme-icon">
-          <PiMoon />
+          {mode === "dark" ? <BsSun /> : <PiMoon />}
         </span>
         <a href="" className="auth-info">
           <Avatar
@@ -38,7 +39,7 @@ const Sidebar = () => {
       <div className="auth">
         <div className="theme-icon">
           <samp onClick={toggleTheme}>
-            <PiMoon />
+            {mode === "dark" ? <BsSun /> : <PiMoon />}
           </samp>
         </div>
         <Avatar

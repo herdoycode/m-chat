@@ -1,7 +1,8 @@
-import Avatar from "../avatar/Avatar";
-import { BsArrowLeft } from "react-icons/bs";
-import "./Messages.scss";
+import { BsArrowLeft, BsEmojiSmile } from "react-icons/bs";
+import { AiOutlineSend } from "react-icons/ai";
 import { useMessageCollapse } from "../../store";
+import Avatar from "../avatar/Avatar";
+import "./Messages.scss";
 
 const Messages = () => {
   const handleCollapse = useMessageCollapse((s) => s.setCollapse);
@@ -22,8 +23,105 @@ const Messages = () => {
           <h3>Herdoy Almamun</h3>
         </div>
       </div>
-      <div className="center">center</div>
-      <div className="bottom">bottom</div>
+      <div className="center">
+        <div className="message">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message own">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message own">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message own">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message own">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message own">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message own">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+        <div className="message own">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+            veniam pariatur cumque deserunt,
+          </p>
+        </div>
+      </div>
+      <div className="bottom">
+        <div className="sent-box">
+          <div className="input">
+            <input type="text" placeholder="Type your messages" />
+            <div className="emoji">
+              <BsEmojiSmile />
+            </div>
+          </div>
+          <button>
+            <AiOutlineSend />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

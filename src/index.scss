@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 :root {
-  --color-primary: #6a00b1;
-  --color-primary-alt: rgba(106, 0, 177, 0.1);
+  --color-primary: #1db100;
+  --color-primary-alt: rgba(29, 177, 0, 0.1);
   --border-color: #b9c7ca;
   --bg-primary: #fff;
   --bg-secondary: #f2f2f2;
@@ -12,8 +12,8 @@
 }
 
 [data-theme="dark"] {
-  --color-primary: #9000f0;
-  --color-primary-alt: rgba(100, 84, 109, 0.3);
+  --color-primary: #199400;
+  --color-primary-alt: rgba(86, 109, 84, 0.3);
   --border-color: #4f5a5c;
   --bg-primary: #252b33;
   --bg-secondary: #20262e;

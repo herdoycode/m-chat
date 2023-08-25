@@ -1,7 +1,8 @@
 .messages {
+  position: relative;
   height: 100vh;
   display: grid;
-  grid-template-rows: 9rem 1fr 9rem;
+  grid-template-rows: 9rem calc(100vh - 9rem);
   grid-template-columns: repeat(1, 1fr);
   .top {
     display: flex;
@@ -26,7 +27,78 @@
       }
     }
   }
+  .center {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 18rem);
+    padding: 2rem 1rem;
+    overflow: auto;
+    gap: 2rem;
+    .message {
+      max-width: 30rem;
+      padding: 1rem;
+      border-radius: 2rem 2rem 2rem 0rem;
+      background: var(--bg-secondary);
+      &.own {
+        align-self: flex-end;
+        background: var(--color-primary);
+        color: #fff;
+        border-radius: 2rem 2rem 0rem 2rem;
+      }
+      @media screen and (max-width: 768px) {
+        max-width: 27rem;
+      }
+    }
+  }
   .bottom {
+    padding: 0rem 1.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     border-top: 1px solid var(--border-color);
+    height: 9rem;
+    display: flex;
+    align-items: center;
+    background: var(--bg-primary);
+    .sent-box {
+      display: flex;
+      height: 5rem;
+      flex: 1;
+      align-items: center;
+      .input {
+        display: flex;
+        flex: 1;
+        padding: 0rem 2rem;
+        height: 100%;
+        align-items: center;
+        border-radius: 0.5rem 0rem 0rem 0.5rem;
+        background: var(--bg-secondary);
+        input {
+          width: 100%;
+          border: none;
+          outline: none;
+          font-size: 1.5rem;
+          letter-spacing: 0.1rem;
+          background: transparent;
+          color: var(--color-text);
+        }
+        .emoji {
+          font-size: 2rem;
+          cursor: pointer;
+        }
+      }
+      button {
+        width: 6rem;
+        height: 100%;
+        border: none;
+        outline: none;
+        background: var(--color-primary);
+        color: #fff;
+        font-size: 2rem;
+        border-radius: 0rem 0.5rem 0.5rem 0rem;
+        cursor: pointer;
+      }
+    }
   }
 }
