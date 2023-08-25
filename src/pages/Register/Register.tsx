@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import "./Register.scss";
-import Joi from "joi";
-import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
 import { useState } from "react";
-import apiClient from "../../services/apiClient";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import apiClient from "../../services/apiClient";
+import "./Register.scss";
 
 interface FormData {
   name: string;
