@@ -1,33 +1,79 @@
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import apiClient from "../../services/apiClient";
 import "./Login.scss";
-import { useEffect } from "react";
-import { useThemeStore } from "../../store";
+
+interface FormData {
+  email: string;
+  password: string;
+}
+
+const schema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .label("Email"),
+  password: Joi.string().min(8).required().label("Password"),
+});
 
 const Login = () => {
-  const mode = useThemeStore((s) => s.mode);
+  const [isLoading, setLoading] = useState<Boolean>(false);
+  const {
+    register,
+    handleSubmit,
 
-  useEffect(() => {
-    const body = document.querySelector("body");
-    body?.setAttribute("data-theme", mode);
-  }, [mode]);
+    formState: { errors },
+  } = useForm<FormData>({ resolver: joiResolver(schema) });
+
+  const onSubmit = (data: FormData) => {
+    setLoading(true);
+    apiClient
+      .post("/auth", data)
+      .then((res) => {
+        localStorage.setItem("token", res.data);
+        setLoading(false);
+        toast.success("Login Success!");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 3000);
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error(err.message);
+      });
+  };
 
   return (
     <div className="login">
       <div className="box">
         <h1>Login</h1>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-item">
-            <input type="email" placeholder="Email Address" />
-            {false && <p className="danger">Lorem ipsum dolor sit amet </p>}
+            <input
+              {...register("email")}
+              type="email"
+              placeholder="Email Address"
+            />
+            {errors.email && <p className="danger">{errors.email.message}</p>}
           </div>
           <div className="input-item">
-            <input type="password" placeholder="Password...." />
-            {false && <p className="danger">Lorem ipsum dolor sit amet </p>}
+            <input
+              {...register("password")}
+              type="password"
+              placeholder="Password...."
+            />
+            {errors.password && (
+              <p className="danger">{errors.password.message}</p>
+            )}
           </div>
-          <button>Register</button>
+          <button> {isLoading ? "Loading..." : "Login"} </button>
         </form>
         <p>
-          Don't have any accout? <Link to="/register">Login</Link>
+          Don't have any accout? <Link to="/register">Register now.</Link>
         </p>
       </div>
     </div>

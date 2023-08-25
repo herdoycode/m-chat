@@ -25,6 +25,11 @@
           color: var(--color-text);
           border-radius: 0.5rem;
         }
+        .danger {
+          margin-top: 0;
+          text-align: left;
+          color: red;
+        }
       }
       button {
         width: 100%;
@@ -34,6 +39,7 @@
         color: #fff;
         font-size: 1.5rem;
         letter-spacing: 0.1rem;
+        border-radius: 0.5rem;
       }
     }
     p {
@@ -42,6 +48,9 @@
       a {
         color: var(--color-primary);
       }
+    }
+    @media screen and (max-width: 768px) {
+      width: 30rem;
     }
   }
 }
