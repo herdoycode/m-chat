@@ -123,5 +123,11 @@
         cursor: pointer;
       }
     }
+    @media screen and (max-height: 600px) {
+      bottom: 5rem;
+      .center {
+        height: calc(100vh - 23rem);
+      }
+    }
   }
 }
