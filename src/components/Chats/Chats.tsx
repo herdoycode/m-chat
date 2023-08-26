@@ -34,7 +34,7 @@ const Chats = () => {
       </div>
       <div className="bottom">
         {chats?.map((chat) => (
-          <SingleChat key={chat._id} />
+          <SingleChat chat={chat} key={chat._id} />
         ))}
       </div>
     </div>
