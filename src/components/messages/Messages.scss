@@ -7,6 +7,7 @@
 }
 
 .messages {
+  position: relative;
   height: 100vh;
   display: grid;
   grid-template-rows: 9rem calc(100vh - 9rem);
@@ -74,7 +75,7 @@
   }
   .bottom {
     padding: 0rem 1.5rem;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -121,6 +122,9 @@
         border-radius: 0rem 0.5rem 0.5rem 0rem;
         cursor: pointer;
       }
+    }
+    @media screen and (max-width: 990px) {
+      position: fixed;
     }
   }
 }
