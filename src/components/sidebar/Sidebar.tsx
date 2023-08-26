@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsFillChatDotsFill, BsSun } from "react-icons/bs";
 import { PiMessengerLogo, PiMoon, PiUserList } from "react-icons/pi";
+import { AuthContext } from "../../contexts/AuthContext";
 import { useThemeStore } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./Sidebar.scss";
-import { AuthContext } from "../../contexts/AuthContext";
 
 const Sidebar = () => {
   const { user } = useContext(AuthContext);

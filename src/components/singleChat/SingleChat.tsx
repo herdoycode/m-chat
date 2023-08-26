@@ -2,10 +2,10 @@ import moment from "moment";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import Chat from "../../entities/Chat";
+import useUser from "../../hooks/useUser";
 import { useChatStore, useMessageCollapse } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./SingleChat.scss";
-import useUser from "../../hooks/useUser";
 
 interface Props {
   chat: Chat;

@@ -1,12 +1,12 @@
 import { useContext, useEffect, useRef } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import { BsArrowLeft, BsEmojiSmile } from "react-icons/bs";
+import { AuthContext } from "../../contexts/AuthContext";
+import useMessages from "../../hooks/useMessages";
+import useUser from "../../hooks/useUser";
 import { useChatStore, useMessageCollapse } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./Messages.scss";
-import useMessages from "../../hooks/useMessages";
-import useUser from "../../hooks/useUser";
-import { AuthContext } from "../../contexts/AuthContext";
 
 const Messages = () => {
   const { user } = useContext(AuthContext);
