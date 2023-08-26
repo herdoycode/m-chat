@@ -7,7 +7,6 @@
 }
 
 .messages {
-  position: relative;
   height: 100vh;
   display: grid;
   grid-template-rows: 9rem calc(100vh - 9rem);
@@ -75,7 +74,7 @@
   }
   .bottom {
     padding: 0rem 1.5rem;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -121,12 +120,6 @@
         font-size: 2rem;
         border-radius: 0rem 0.5rem 0.5rem 0rem;
         cursor: pointer;
-      }
-    }
-    @media screen and (max-height: 600px) {
-      bottom: 5rem;
-      .center {
-        height: calc(100vh - 23rem);
       }
     }
   }
