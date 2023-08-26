@@ -36,7 +36,7 @@ const SingleChat = ({ chat }: Props) => {
           <Avatar src={friend?.avatar!} isActive={true} />
         </div>
         <div className="friend-data">
-          <h4>Herdoy Almamun</h4>
+          <h4>{friend?.name}</h4>
           <p> {chat.latestMessage ? chat.latestMessage : "Say hello"} </p>
         </div>
       </div>
