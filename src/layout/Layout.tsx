@@ -1,4 +1,4 @@
-import Chats from "../components/chats/Chats";
+import Chats from "../pages/chats/Chats";
 import Messages from "../components/messages/Messages";
 import Sidebar from "../components/sidebar/Sidebar";
 import { useMessageCollapse } from "../store";

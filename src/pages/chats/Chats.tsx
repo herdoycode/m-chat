@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import useChats from "../../hooks/useChats";
-import Avatar from "../avatar/Avatar";
-import SearchBox from "../searchBox/SearchBox";
-import SingleChat from "../singleChat/SingleChat";
+import Avatar from "../../components/avatar/Avatar";
+import SearchBox from "../../components/searchBox/SearchBox";
+import SingleChat from "../../components/singleChat/SingleChat";
 import "./Chats.scss";
 
 const actives = [1, 2, 3, 4];
