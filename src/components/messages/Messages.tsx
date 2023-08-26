@@ -3,15 +3,17 @@ import { AiOutlineSend } from "react-icons/ai";
 import { BsArrowLeft, BsEmojiSmile } from "react-icons/bs";
 import { AuthContext } from "../../contexts/AuthContext";
 import useMessages from "../../hooks/useMessages";
+import useSentMessage from "../../hooks/useSentMessage";
 import useUser from "../../hooks/useUser";
 import { useChatStore, useMessageCollapse } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./Messages.scss";
 
 const Messages = () => {
+  const messageRef = useRef<HTMLInputElement>(null);
   const { user } = useContext(AuthContext);
   const handleCollapse = useMessageCollapse((s) => s.setCollapse);
-  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -24,6 +26,12 @@ const Messages = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, selectedChatId]);
+
+  const clear = () => {
+    if (messageRef.current) messageRef.current.value = "";
+  };
+
+  const { mutate } = useSentMessage(clear);
 
   if (!selectedChatId)
     return (
@@ -63,12 +71,24 @@ const Messages = () => {
       <div className="bottom">
         <div className="sent-box">
           <div className="input">
-            <input type="text" placeholder="Type your messages" />
+            <input
+              ref={messageRef}
+              type="text"
+              placeholder="Type your messages"
+            />
             <div className="emoji">
               <BsEmojiSmile />
             </div>
           </div>
-          <button>
+          <button
+            onClick={() => {
+              mutate({
+                chatId: selectedChatId,
+                sender: user._id,
+                content: messageRef.current?.value!,
+              });
+            }}
+          >
             <AiOutlineSend />
           </button>
         </div>
