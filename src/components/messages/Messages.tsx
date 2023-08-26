@@ -50,7 +50,7 @@ const Messages = () => {
           <div className="user-avatar">
             <Avatar src={friend?.avatar!} isActive={false} />
           </div>
-          <h3>Herdoy Almamun</h3>
+          <h3>{friend?.name}</h3>
         </div>
       </div>
       <div className="center">
