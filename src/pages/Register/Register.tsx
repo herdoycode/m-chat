@@ -1,4 +1,5 @@
 import { joiResolver } from "@hookform/resolvers/joi";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Joi from "joi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -6,11 +7,13 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import apiClient from "../../services/apiClient";
 import "./Register.scss";
+import { storage } from "../../firebase";
 
 interface FormData {
   name: string;
   email: string;
   password: string;
+  avatar: FileList;
 }
 
 const schema = Joi.object({
@@ -20,32 +23,39 @@ const schema = Joi.object({
     .required()
     .label("Email"),
   password: Joi.string().min(8).required().label("Password"),
+  avatar: Joi.any().required(),
 });
 
 const Register = () => {
-  const [isLoading, setLoading] = useState<Boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormData>({ resolver: joiResolver(schema) });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
-    apiClient
-      .post("/users", data)
-      .then((res) => {
-        localStorage.setItem("token", res.headers["x-auth-token"]);
-        setLoading(false);
-        toast.success("Registered Success!");
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 3000);
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(err.message);
+    const file = data.avatar[0];
+    const storageRef = ref(storage, `${Date.now()}`);
+    await uploadBytesResumable(storageRef, file).then(() => {
+      getDownloadURL(storageRef).then(async (downloadURL: string) => {
+        apiClient
+          .post("/users", { ...data, avatar: downloadURL })
+          .then((res) => {
+            localStorage.setItem("token", res.headers["x-auth-token"]);
+            setLoading(false);
+            toast.success("Registered Success!");
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 3000);
+          })
+          .catch((err) => {
+            setLoading(false);
+            toast.error(err.message);
+          });
       });
+    });
   };
 
   return (
@@ -79,7 +89,20 @@ const Register = () => {
               <p className="danger"> {errors.password.message} </p>
             )}
           </div>
-          <button> {isLoading ? "Loading..." : "Register"} </button>
+          <div className="input-item">
+            <input
+              {...register("avatar")}
+              type="file"
+              required
+              placeholder="Password...."
+            />
+            {errors.avatar && (
+              <p className="danger"> {errors.avatar.message} </p>
+            )}
+          </div>
+          <button disabled={isLoading && isValid}>
+            {isLoading ? "Loading..." : "Register"}
+          </button>
         </form>
         <p>
           Already have accoutn? <Link to="/login">Login.</Link>
