@@ -1,13 +1,13 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import Joi from "joi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { storage } from "../../firebase";
 import apiClient from "../../services/apiClient";
 import "./Register.scss";
-import { storage } from "../../firebase";
 
 interface FormData {
   name: string;
