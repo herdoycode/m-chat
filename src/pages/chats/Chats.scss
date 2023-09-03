@@ -1,5 +1,5 @@
 .chats {
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-rows: 12rem 12rem 1fr;
   padding: 0rem 1rem;
@@ -38,6 +38,6 @@
     flex-direction: column;
   }
   @media screen and (max-width: 990px) {
-    height: calc(100vh - 7rem);
+    height: calc(100% - 7rem);
   }
 }
