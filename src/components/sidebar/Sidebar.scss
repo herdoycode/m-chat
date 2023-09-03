@@ -47,6 +47,10 @@
     }
   }
   @media screen and (max-width: 990px) {
+    position: fixed;
+    bottom: 0;
+    height: 7rem;
+    background: var(--bg-primary);
     flex-direction: row;
     align-items: center;
     justify-content: center;
