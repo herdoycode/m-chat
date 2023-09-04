@@ -1,16 +1,23 @@
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
-import useChats from "../../hooks/useChats";
+import { useContext, useEffect, useState } from "react";
 import Avatar from "../../components/avatar/Avatar";
 import SearchBox from "../../components/searchBox/SearchBox";
 import SingleChat from "../../components/singleChat/SingleChat";
+import { AuthContext } from "../../contexts/AuthContext";
+import User from "../../entities/User";
+import useChats from "../../hooks/useChats";
+import { socket } from "../../socket";
 import "./Chats.scss";
-
-const actives = [1, 2, 3, 4];
 
 const Chats = () => {
   const { user } = useContext(AuthContext);
   const { data: chats } = useChats(user._id);
+  const [activeUsers, setActiveUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    socket.on("get-users", (users) => setActiveUsers(users));
+  }, []);
+
+  const activeUsers_ = activeUsers.filter((u) => u._id !== user._id);
 
   return (
     <div className="chats">
@@ -20,13 +27,10 @@ const Chats = () => {
       </div>
       <div className="center">
         <div className="active-users">
-          {actives.map((a) => (
-            <div className="user" key={a}>
-              <Avatar
-                src="https://i.ibb.co/hYTJZXx/me-removebg-preview.jpg"
-                isActive={true}
-              />
-              <p>Herdoy</p>
+          {activeUsers_.map((user) => (
+            <div className="user" key={user._id}>
+              <Avatar src={user.avatar} isActive={true} />
+              <p> {user.name.slice(0, 8)}... </p>
             </div>
           ))}
         </div>
