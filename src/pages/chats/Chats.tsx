@@ -27,12 +27,16 @@ const Chats = () => {
       </div>
       <div className="center">
         <div className="active-users">
-          {activeUsers_.map((user) => (
-            <div className="user" key={user._id}>
-              <Avatar src={user.avatar} isActive={true} />
-              <p> {user.name.slice(0, 8)}... </p>
-            </div>
-          ))}
+          {activeUsers_.length !== 0 ? (
+            activeUsers_.map((user) => (
+              <div className="user" key={user._id}>
+                <Avatar src={user.avatar} isActive={true} />
+                <p> {user.name} </p>
+              </div>
+            ))
+          ) : (
+            <p>No active users for chat!</p>
+          )}
         </div>
         <h3>Recent</h3>
       </div>
