@@ -1,10 +1,11 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import { BsArrowLeft, BsEmojiSmile } from "react-icons/bs";
 import { AuthContext } from "../../contexts/AuthContext";
-import useMessages from "../../hooks/useMessages";
-import useSentMessage from "../../hooks/useSentMessage";
+import Message from "../../entities/Message";
 import useUser from "../../hooks/useUser";
+import apiClient from "../../services/apiClient";
+import { socket } from "../../socket";
 import { useChatStore, useMessageCollapse } from "../../store";
 import Avatar from "../avatar/Avatar";
 import "./Messages.scss";
@@ -12,6 +13,7 @@ import "./Messages.scss";
 const Messages = () => {
   const messageRef = useRef<HTMLInputElement>(null);
   const { user } = useContext(AuthContext);
+  const [messages, setMessages] = useState<Message[]>([]);
   const handleCollapse = useMessageCollapse((s) => s.setCollapse);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollToBottom = () => {
@@ -20,18 +22,32 @@ const Messages = () => {
 
   const selectedChatId = useChatStore((s) => s.selectedChatId);
   const friendId = useChatStore((s) => s.selectedFriendId);
-  const { data: messages } = useMessages(selectedChatId);
   const { data: friend } = useUser(friendId);
+
+  useEffect(() => {
+    apiClient
+      .get<Message[]>("/messages", {
+        params: {
+          chatId: selectedChatId,
+        },
+      })
+      .then((res) => setMessages(res.data))
+      .catch((err) => console.log(err));
+  }, [selectedChatId]);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages, selectedChatId]);
 
-  const clear = () => {
-    if (messageRef.current) messageRef.current.value = "";
-  };
-
-  const { mutate } = useSentMessage(clear);
+  useEffect(() => {
+    socket.on("recieve-message", (message: Message) => {
+      if (message.chatId === selectedChatId) {
+        setMessages([...messages, message]);
+      } else {
+        return messages;
+      }
+    });
+  });
 
   if (!selectedChatId)
     return (
@@ -82,11 +98,18 @@ const Messages = () => {
           </div>
           <button
             onClick={() => {
-              mutate({
-                chatId: selectedChatId,
-                sender: user._id,
-                content: messageRef.current?.value!,
-              });
+              if (messageRef.current && messageRef.current.value) {
+                const message = {
+                  chatId: selectedChatId,
+                  sender: user._id,
+                  content: messageRef.current.value,
+                };
+                apiClient
+                  .post("/messages", message)
+                  .then((res) => socket.emit("send-message", res.data));
+
+                messageRef.current.value = "";
+              }
             }}
           >
             <AiOutlineSend />
