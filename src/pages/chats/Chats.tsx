@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Avatar from "../../components/avatar/Avatar";
 import SearchBox from "../../components/searchBox/SearchBox";
 import SingleChat from "../../components/singleChat/SingleChat";
 import { AuthContext } from "../../contexts/AuthContext";
 import User from "../../entities/User";
 import useChats from "../../hooks/useChats";
-import { socket } from "../../socket";
-import "./Chats.scss";
 import apiClient from "../../services/apiClient";
+import { socket } from "../../socket";
 import { useChatStore, useMessageCollapse } from "../../store";
-import { toast } from "react-toastify";
+import "./Chats.scss";
 
 const Chats = () => {
   const { user: authUser } = useContext(AuthContext);
