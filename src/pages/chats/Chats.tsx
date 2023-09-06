@@ -7,17 +7,23 @@ import User from "../../entities/User";
 import useChats from "../../hooks/useChats";
 import { socket } from "../../socket";
 import "./Chats.scss";
+import apiClient from "../../services/apiClient";
+import { useChatStore, useMessageCollapse } from "../../store";
+import { toast } from "react-toastify";
 
 const Chats = () => {
-  const { user } = useContext(AuthContext);
-  const { data: chats } = useChats(user._id);
+  const { user: authUser } = useContext(AuthContext);
+  const { data: chats } = useChats(authUser._id);
   const [activeUsers, setActiveUsers] = useState<User[]>([]);
+
+  const setChatId = useChatStore((s) => s.setChatId);
+  const handleCollapse = useMessageCollapse((s) => s.setCollapse);
 
   useEffect(() => {
     socket.on("get-users", (users) => setActiveUsers(users));
   }, []);
 
-  const activeUsers_ = activeUsers.filter((u) => u._id !== user._id);
+  const activeUsers_ = activeUsers.filter((u) => u._id !== authUser._id);
 
   return (
     <div className="chats">
@@ -29,7 +35,22 @@ const Chats = () => {
         <div className="active-users">
           {activeUsers_.length !== 0 ? (
             activeUsers_.map((user) => (
-              <div className="user" key={user._id}>
+              <div
+                onClick={() => {
+                  apiClient
+                    .post("/chats", {
+                      friendId: user._id,
+                      userId: authUser._id,
+                    })
+                    .then((res) => {
+                      setChatId(res.data._id);
+                      handleCollapse();
+                    })
+                    .catch((err) => toast.error(err.response.data));
+                }}
+                className="user"
+                key={user._id}
+              >
                 <Avatar src={user.avatar} isActive={true} />
                 <p> {user.name} </p>
               </div>
