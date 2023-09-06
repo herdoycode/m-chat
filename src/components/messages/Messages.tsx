@@ -41,11 +41,8 @@ const Messages = () => {
 
   useEffect(() => {
     socket.on("recieve-message", (message: Message) => {
-      if (message.chatId === selectedChatId) {
-        setMessages([...messages, message]);
-      } else {
-        return messages;
-      }
+      if (message.chatId !== selectedChatId) return;
+      setMessages([...messages, message]);
     });
   });
 
@@ -100,15 +97,22 @@ const Messages = () => {
             onClick={() => {
               if (messageRef.current && messageRef.current.value) {
                 const message = {
+                  receiverId: friend?._id,
                   chatId: selectedChatId,
-                  sender: user._id,
+                  sender: user?._id,
                   content: messageRef.current.value,
                 };
                 apiClient
                   .post("/messages", message)
-                  .then((res) => socket.emit("send-message", res.data));
-
-                messageRef.current.value = "";
+                  .then((res) => {
+                    socket.emit("send-message", {
+                      ...res.data,
+                      receiverId: friend?._id,
+                    });
+                    setMessages([...messages, res.data]);
+                    if (messageRef.current) messageRef.current.value = "";
+                  })
+                  .catch((err) => console.log(err.message));
               }
             }}
           >
