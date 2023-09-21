@@ -39,15 +39,13 @@
   }
   .center {
     position: absolute;
+    top: 9rem;
+    overflow: auto;
     width: 100%;
+    height: calc(100vh - 18rem);
     display: flex;
     flex-direction: column;
-    top: 9rem;
-    height: calc(100% - 18rem);
-    overflow: auto;
-    gap: 1rem;
-    padding: 2rem 1rem;
-    justify-content: flex-end;
+    gap: 2rem 1rem;
     .message {
       display: flex;
       .text {

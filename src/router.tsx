@@ -1,25 +1,22 @@
-import { useContext } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import { AuthContext } from "./contexts/AuthContext";
 import Layout from "./layout/Layout";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 
+const auth = localStorage.getItem("token");
+
 const RenderLayout = () => {
-  const { user } = useContext(AuthContext);
-  if (user) return <Layout />;
+  if (auth) return <Layout />;
   return <Login />;
 };
 
 const RenderLogin = () => {
-  const { user } = useContext(AuthContext);
-  if (user) return <Layout />;
+  if (auth) return <Layout />;
   return <Login />;
 };
 
 const RenderRegister = () => {
-  const { user } = useContext(AuthContext);
-  if (user) return <Layout />;
+  if (auth) return <Layout />;
   return <Register />;
 };
 
