@@ -21,6 +21,13 @@ const SingleChat = ({ chat }: Props) => {
   const { data: friend } = useUser(friendId);
 
   const handleCollapse = useMessageCollapse((s) => s.setCollapse);
+
+  const renderLastMessage = (message: string) => {
+    if (!message) return "Say Hello";
+    if (message.length >= 32) return message.slice(0, 31);
+    return message;
+  };
+
   return (
     <div
       onClick={() => {
@@ -37,7 +44,7 @@ const SingleChat = ({ chat }: Props) => {
         </div>
         <div className="friend-data">
           <h4>{friend?.name}</h4>
-          <p> {chat.latestMessage ? chat.latestMessage : "Say hello"} </p>
+          <p> {renderLastMessage(chat.latestMessage)} </p>
         </div>
       </div>
       <div className="time">
